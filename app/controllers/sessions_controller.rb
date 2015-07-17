@@ -14,7 +14,24 @@ class SessionsController < ApplicationController
   	@user = User.new
   end
 
-  def login
+  def attempt_login
+
+  	if params[:username].present? && params[:password].present?
+  	      found_user = User.where(username: params[:username]).first
+  	      if found_user
+  	        @authorized_user = found_user.authenticate(params[:password])
+  	        if @authorized_user
+  	        	session[:user_id] = @authorized_user.id
+  	        	redirect_to home_path
+  	        else
+  	        	render :login
+  	        end
+  	      else
+  	      	render :login
+  	      end
+  	else
+  	  	render :login
+  	end
   end
 
   def home

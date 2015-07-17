@@ -1,2 +1,26 @@
 <h1>Sessions#login</h1>
 <p>Find me in app/views/sessions/login.html.erb</p>
+<% if @authorized_user %>
+	<% if @authorized_user.errors.any? %>
+	<ul class="alert alert-danger">
+	    <%    @authorized_user.errors.full_messages.each do |error| %>
+	            <li><%= error %></li>
+	    <% end %>
+	</ul>
+	<% end %>
+<% end %>
+
+<%= form_tag(login_path) do %>
+
+  <%= label_tag(:username)%>
+  <%= text_field_tag(:username, params[:username], autofocus: true)%>
+
+
+  <%= label_tag(:password)%>
+  <%= password_field_tag(:password)%>
+
+  <%= submit_tag("Log in", class: "btn btn-primary") %>
+
+<% end %>
+
+<%= link_to "Don't have an account? Sign up here", signup_path%>
