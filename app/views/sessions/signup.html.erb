@@ -1,2 +1,25 @@
 <h1>Sessions#signup</h1>
 <p>Find me in app/views/sessions/signup.html.erb</p>
+
+<% if @user.errors.any? %>
+<ul class="alert alert-danger">
+    <%    @user.errors.full_messages.each do |error| %>
+            <li><%= error %></li>
+    <% end %>
+</ul>
+<% end %>
+
+<%= form_for(@user, url: signup_path) do |f|%>
+  <p>
+  	<%= f.label :username %>
+    <%= f.text_field :username, autofocus: true %>
+  </p>
+  <p>  
+  	<%= f.label :password %>
+    <%= f.text_field :password, required: true %>
+  </p>
+  <p>
+    <%= f.submit "Signup", class: "btn btn-primary" %>
+  </p>
+    <%= link_to "Have an account already? Log in here", login_path %>
+<% end %>
