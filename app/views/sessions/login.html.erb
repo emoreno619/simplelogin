@@ -1,11 +1,10 @@
 <h1>Sessions#login</h1>
 <p>Find me in app/views/sessions/login.html.erb</p>
-<% if @authorized_user %>
-	<% if @authorized_user.errors.any? %>
+
+<% if @parker %>
+	<% if @parker[:errors] %>
 	<ul class="alert alert-danger">
-	    <%    @authorized_user.errors.full_messages.each do |error| %>
-	            <li><%= error %></li>
-	    <% end %>
+	    <%= @parker[:errors] %>
 	</ul>
 	<% end %>
 <% end %>
