@@ -1,4 +1,23 @@
 Rails.application.routes.draw do
+  # get 'sessions/signup'
+
+  # get 'sessions/login'
+
+  # get 'sessions/home'
+
+  root 'sessions#login'
+    get '/login', to: "sessions#login", as: 'login'
+
+    get '/signup', to: "sessions#signup", as: 'signup'
+
+    post '/login', to: "sessions#attempt_login"
+
+    post '/signup', to: "sessions#create"
+
+    get '/home', to: "sessions#home", as: 'home'
+
+    delete '/logout', to: "sessions#logout", as: "logout"
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
