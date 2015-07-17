@@ -22,7 +22,7 @@ class SessionsController < ApplicationController
   	        @authorized_user = found_user.authenticate(params[:password])
   	        if @authorized_user
   	        	session[:user_id] = @authorized_user.id
-  	        	redirect_to home_path
+  	        	redirect_to home_path, flash: {success: "You're logged in!"}
   	        else
   	        	render :login
   	        end
@@ -32,6 +32,11 @@ class SessionsController < ApplicationController
   	else
   	  	render :login
   	end
+  end
+
+  def logout
+	session[:user_id] = nil
+	redirect_to login_path
   end
 
   def home
